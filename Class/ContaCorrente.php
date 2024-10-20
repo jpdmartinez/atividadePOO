@@ -23,21 +23,26 @@ class ContaCorrente extends ContaBancaria{
         return $this->limite;
     }
 
-    public function saqueContaCorrente(float $valor): void{
-        if ($valor > $this->getSaldo() and $valor>=$this->limite){
-            if ($valor <= $this->getSaldo() + $this->limite){
-                $valor -= $this->getSaldo();
-                $this->saldo = 0;
-                $this->limite -= $valor; 
-
-                echo "Limite {$this->limite} <br> Saque {$valor} <br> Saldo {$this->saldo}";
+    public function sacar(float $valor): mixed {
+        if ($valor <= $this->getSaldo() + $this->limite){
+            if ($valor <= $this->getSaldo()){
+                $this->setSaldo($this->getSaldo() - $valor);
+                echo "Saque em conta corrente realizado com sucesso! <br> Saldo Atual: R$ {$this->getSaldo()} <br> Limite Atual: R$ {$this->limite} <br>";
+                return $this->getSaldo();
             } else {
-                echo "Não há limite disponível para realizar o saque.";
-                echo "Limite {$this->limite} <br> Saque {$valor} <br> Saldo {$this->getSaldo()}";
+                $valor -= $this->getSaldo();
+                $this->setSaldo(0);
+                $novo_limite = $this->getLimite() - $valor;
+                $this->limite = $novo_limite; 
+
+                echo "Saque em conta corrente realizado com sucesso! <br> Saldo Atual: R$ {$this->getSaldo()} <br> Limite Atual: R$ {$this->limite} <br>";
+                return $this->getSaldo();
             }
+            
         } else {
-            $this->saldo = $this->getSaldo() - $valor;
-            echo "Limite {$this->limite} <br> Saque {$valor} <br> Saldo {$this->getSaldo()}";
+            echo "Não há limite ou saldo disponível para realizar o saque de R$ {$valor}. <br>";
+            echo "Saldo Atual: R$ {$this->getSaldo()} <br> Limite Atual: R$ {$this->limite} <br>";
+            return false;
         }
     }
 

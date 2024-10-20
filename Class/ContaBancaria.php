@@ -36,16 +36,18 @@ class ContaBancaria {
 
     public function depositar(float $valor): void {
         $this->saldo += $valor;
-        echo "Valor depositado com sucesso! ({$valor}) <br>";
+        echo "Valor depositado com sucesso! (R$ {$valor}) <br>";
+        echo "Novo Saldo: R$ {$this->saldo} <br>";
     }
 
-    public function sacar(float $valor): float {
+    public function sacar(float $valor): mixed {
         if ($this->saldo >= $valor){
             $this->saldo -= $valor;
-            echo "Saque realizado com sucesso. ({$valor}) <br>";
+            echo "Saque de R$ {$valor} realizado com sucesso. <br>";
+            echo "Novo Saldo: R$ {$this->saldo} <br>";
             return $this->saldo;
         } else {
-            echo "Impossível realizar o saque ({$valor}) <br>";
+            echo "Impossível realizar o saque de R$ {$valor} <br>";
             return false;
         }
     }
