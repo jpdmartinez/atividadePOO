@@ -1,37 +1,19 @@
 <?php
 
-require_once('./Class/ContaBancaria.php');
-require_once('./Class/ContaCorrente.php');
-require_once('./class/ContaPoupanca.php');
+require_once('./class/Veiculo.php');
+require_once('./class/Carro.php');
+require_once('./class/Moto.php');
 
 
-$contaCorrente1 = new ContaCorrente('João', 100, 500);
-$poupanca1 = new ContaPoupanca("Pedro", 100);
 
-$contaCorrente1->sacar(50);
-echo "<br>";
-$contaCorrente1->depositar(200);
-echo "<br>";
-echo "<br>";
-$contaCorrente1->sacar(500);
-echo "<br>";
-echo "<br>";
-$contaCorrente1->sacar(1000);
-echo "<br>";
-echo "<br>";
-$contaCorrente1->sacar(200);
-echo "<br>";
-echo "<br>";
-$poupanca1->sacar(70);
-echo "<br>";
-echo "<br>";
-$poupanca1->depositar(30);
-echo "<br>";
-echo "<br>";
-$poupanca1->depositar(50);
-echo "<br>";
-echo "<br>";
-$poupanca1->sacar(48.70);
-echo "<br>";
-echo "<br>";
-$poupanca1->renderJuros(5);
+$carro1 = new Carro('Toyota', 'Corolla', 2020, 4);
+$moto1 = new Moto('Yamaha', 'MT-07', 2018);
+
+$carro1->acelerar(50);
+$carro1->abrirPorta(1);
+
+$moto1->acelerar(30);
+$moto1->empinar();
+
+$carro1->frear(20);
+$moto1->frear(10);
